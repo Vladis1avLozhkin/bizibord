@@ -2,6 +2,8 @@ export default class BoardGrid {
 
     constructor() {
         this.collSelector = '.board-grid__coll';
+        // Для элементов перетакскиваемых по доске
+        this.dragableCard = null;
 
         let colls = document.querySelectorAll(this.collSelector);
 
@@ -24,16 +26,8 @@ export default class BoardGrid {
         coll.classList.remove('board-grid__coll_state_over');
     }
 
-    removeCardEventeHandler(card) {
-        let removeBtn = card.querySelector('.card__remove-btn');
-            removeBtn.addEventListener('click', () => {
-            card.remove();
-        });
-    }
-
     handleDrop(event) {
         event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
 
         let coll = event.target;
         coll.classList.remove('board-grid__coll_state_over');
@@ -52,6 +46,43 @@ export default class BoardGrid {
         card.classList.remove('card_draggable');
 
         coll.appendChild(card);
-        this.removeCardEventeHandler(card);
+        this.handingCardEvent(card);
+    }
+
+    handingCardEvent(card) {
+        this.dndCardsEventsHandler(card);
+        this.removeCardEventHandler(card);
+    }
+
+    removeCardEventHandler(card) {
+        let removeBtn = card.querySelector('.card__remove-btn');
+            removeBtn.addEventListener('click', () => {
+            card.remove();
+        });
+    }
+
+    dndCardsEventsHandler(card) {
+        card.addEventListener('dragstart', this.dragCardStart.bind(this), false);
+        card.addEventListener('dragend', this.dragCardEnd.bind(this), false);
+        card.addEventListener('dragenter', this.dragCardEnter.bind(this), false);
+    }
+
+    dragCardStart(event) {
+        let card = event.target;
+        card.classList.add('card_draggable');
+        this.dragableCard = card;
+
+        event.dataTransfer.setData("text", card.dataset.id);
+    }
+
+    dragCardEnter() {
+        if (this.dragableCard) {
+            this.dragableCard.remove();
+            this.dragableCard = null;
+        }
+    }
+
+    dragCardEnd(event) {
+        event.target.classList.remove('card_draggable');
     }
 }
