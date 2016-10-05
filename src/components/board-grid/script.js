@@ -2,6 +2,14 @@ export default class BoardGrid {
 
     constructor() {
         this.collSelector = '.board-grid__coll';
+
+        let colls = document.querySelectorAll(this.collSelector);
+
+        Array.prototype.forEach.call(colls, (coll, i) => {
+            coll.addEventListener('dragover', this.handleDragOver, false);
+            coll.addEventListener('dragleave', this.handleDragLeave, false);
+            coll.addEventListener('drop', this.handleDrop.bind(this));
+        });
     }
 
     handleDragOver(event) {
@@ -18,7 +26,7 @@ export default class BoardGrid {
 
     removeCardEventeHandler(card) {
         let removeBtn = card.querySelector('.card__remove-btn');
-        removeBtn.addEventListener('click', () => {
+            removeBtn.addEventListener('click', () => {
             card.remove();
         });
     }
@@ -44,15 +52,5 @@ export default class BoardGrid {
 
         coll.appendChild(card);
         this.removeCardEventeHandler(card);
-    }
-
-    drugHanding() {
-        let colls = document.querySelectorAll(this.collSelector);
-
-        Array.prototype.forEach.call(colls, (coll, i) => {
-            coll.addEventListener('dragover', this.handleDragOver, false);
-            coll.addEventListener('dragleave', this.handleDragLeave, false);
-            coll.addEventListener('drop', this.handleDrop.bind(this));
-        });
     }
 }
