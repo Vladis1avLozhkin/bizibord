@@ -16,7 +16,7 @@ export default class BoardGrid {
         coll.classList.remove('board-grid__coll_state_over');
     }
 
-    removeCardEventer(card) {
+    removeCardEventeHandler(card) {
         let removeBtn = card.querySelector('.card__remove-btn');
         removeBtn.addEventListener('click', () => {
             card.remove();
@@ -30,6 +30,11 @@ export default class BoardGrid {
         let coll = event.target;
         coll.classList.remove('board-grid__coll_state_over');
 
+        // Если в ячейке уже присутсвует элемент то добавить не добавлять новый
+        if (coll.innerHTML) {
+            return false;
+        }
+
         let cardId = event.dataTransfer.getData('text');
         let originalCard = document.getElementById(cardId);
         let card = originalCard.cloneNode(true);
@@ -38,8 +43,7 @@ export default class BoardGrid {
         card.classList.remove('card_draggable');
 
         coll.appendChild(card);
-
-        this.removeCardEventer(card);
+        this.removeCardEventeHandler(card);
     }
 
     drugHanding() {
