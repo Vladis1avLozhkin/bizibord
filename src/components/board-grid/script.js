@@ -16,6 +16,13 @@ export default class BoardGrid {
         coll.classList.remove('board-grid__coll_state_over');
     }
 
+    removeCardEventer(card) {
+        let removeBtn = card.querySelector('.card__remove-btn');
+        removeBtn.addEventListener('click', () => {
+            card.remove();
+        });
+    }
+
     handleDrop(event) {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
@@ -31,6 +38,8 @@ export default class BoardGrid {
         card.classList.remove('card_draggable');
 
         coll.appendChild(card);
+
+        this.removeCardEventer(card);
     }
 
     drugHanding() {
@@ -39,7 +48,7 @@ export default class BoardGrid {
         Array.prototype.forEach.call(colls, (coll, i) => {
             coll.addEventListener('dragover', this.handleDragOver, false);
             coll.addEventListener('dragleave', this.handleDragLeave, false);
-            coll.addEventListener('drop', this.handleDrop);
+            coll.addEventListener('drop', this.handleDrop.bind(this));
         });
     }
 }
