@@ -6,8 +6,6 @@ export default class Cards {
         Array.prototype.forEach.call(cards, (card, i) => {
             card.addEventListener('dragstart', this.handleDragStart, false);
             card.addEventListener('dragend', this.handleDragEnd, false);
-            card.addEventListener('dragenter', () => {
-            }, false);
         });
     }
 

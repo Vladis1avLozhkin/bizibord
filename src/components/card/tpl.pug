@@ -1,0 +1,5 @@
+mixin card(width, height)
+    - var mod = "card_size_" + width + "x" + height
+    - var id = "card-" + width + "x" + height
+    div(class="card " + mod  id="" + id draggable="true")
+        button.card__remove-btn
