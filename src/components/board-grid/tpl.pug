@@ -1,0 +1,7 @@
+mixin board-grid(countX, countY)
+    .board-grid
+        - for (var x = 0; x < countX; x++)
+            .board-grid__row
+                - var currentCounterY = 1
+                while currentCounterY < (countY + 1)
+                    .board-grid__coll= currentCounterY++
