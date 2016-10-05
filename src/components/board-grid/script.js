@@ -46,6 +46,7 @@ export default class BoardGrid {
         let cardId = event.dataTransfer.getData('text');
         let originalCard = document.getElementById(cardId);
         let card = originalCard.cloneNode(true);
+        card.dataset.id = card.id;
         card.id = ""
         card.classList.add('card_in-grid');
         card.classList.remove('card_draggable');
