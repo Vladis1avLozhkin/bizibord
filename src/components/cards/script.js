@@ -8,9 +8,9 @@ export default class Cards {
 
         card.classList.add('cards__item_draggable');
 
-        event.dataTransfer.dropEffect = 'move';
-        event.dataTransfer.effectAllowed = 'move';
-        event.dataTransfer.setData('text/html', card.innerHTML);
+        event.dataTransfer.dropEffect = 'copy';
+        event.dataTransfer.setData('text/html', card);
+        console.log(card);
     }
 
     handleDragEnd(event) {
