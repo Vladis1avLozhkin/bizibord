@@ -1,18 +1,18 @@
 export default class Cards {
     constructor() {
-        this.cardSelector = '.cards__item';
+        this.cardSelector = '.card';
     }
 
     handleDragStart(event) {
         let card = event.target;
 
-        card.classList.add('cards__item_draggable');
+        card.classList.add('card_draggable');
 
         event.dataTransfer.setData("text", card.id);
     }
 
     handleDragEnd(event) {
-        event.target.classList.remove('cards__item_draggable');
+        event.target.classList.remove('card_draggable');
     }
 
     drugTracking() {

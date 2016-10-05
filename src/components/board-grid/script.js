@@ -20,12 +20,17 @@ export default class BoardGrid {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
 
+        let coll = event.target;
+        coll.classList.remove('board-grid__coll_state_over');
+
         let cardId = event.dataTransfer.getData('text');
         let originalCard = document.getElementById(cardId);
         let card = originalCard.cloneNode(true);
         card.id = ""
+        card.classList.add('card_in-grid');
+        card.classList.remove('card_draggable');
 
-        event.target.appendChild(card);
+        coll.appendChild(card);
     }
 
     drugHanding() {

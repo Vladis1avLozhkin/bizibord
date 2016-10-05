@@ -3,43 +3,75 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    &__item {
-        background: #90C695;
-
-        border: 1px solid #2C3E50;
-        width: @small-card-size;
-        height: @small-card-size;
-        margin: 10px;
-
-        &_size_1x2 {
-            background: #00B16A;
-            width: @small-card-size * 2;
-        }
-
-        &_size_1x3 {
-            background: #59ABE3;
-            width: @small-card-size * 3;
-        }
-
-        &_size_4x1 {
-            background: #4183D7;
-            height: @small-card-size * 4;
-        }
-
-        &_size_2x2 {
-            background: #E08283;
-            width: @small-card-size * 2;
-            height: @small-card-size * 2;
-        }
-
-        &_draggable {
-            opacity: .4;
-        }
-    }
-
     &__title {
         flex-basis: 100%;
     }
 
 }
 
+.card {
+    background: #90C695;
+
+    width: @small-card-size;
+    height: @small-card-size;
+    margin: 10px;
+
+    &_size_1x2 {
+        background: #00B16A;
+        width: @small-card-size * 2;
+    }
+
+    &_size_1x3 {
+        background: #59ABE3;
+        width: @small-card-size * 3;
+    }
+
+    &_size_4x1 {
+        background: #4183D7;
+        height: @small-card-size * 4;
+    }
+
+    &_size_2x2 {
+        background: #E08283;
+        width: @small-card-size * 2;
+        height: @small-card-size * 2;
+    }
+
+    &_draggable {
+        opacity: .4;
+    }
+}
+
+.card_in-grid {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: @card-size;
+    width: @card-size;
+
+    &.card_size_1x2 {
+        background: #00B16A;
+        height: @card-size;
+        width: @card-size * 2;
+    }
+
+    &.card_size_1x3 {
+        background: #59ABE3;
+        height: @card-size;
+        width: @card-size * 3;
+    }
+
+    &.card_size_4x1 {
+        background: #4183D7;
+        height: @card-size * 4;
+        width: @card-size;
+    }
+
+    &.card_size_2x2 {
+        background: #E08283;
+        width: @card-size * 2;
+        height: @card-size * 2;
+    }
+}
