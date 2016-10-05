@@ -1,3 +1,8 @@
-import {cardsDrugTracking} from './components/cards/script.js';
+import Cards from './components/cards/script.js';
+import BoardGrid from './components/board-grid/script.js';
 
-cardsDrugTracking();
+const cards = new Cards;
+const boardGrid = new BoardGrid;
+
+cards.drugTracking();
+boardGrid.drugHanding();
