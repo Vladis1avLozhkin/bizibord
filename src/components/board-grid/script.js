@@ -1,7 +1,8 @@
 export default class BoardGrid {
 
     constructor() {
-        this.collSelector = '.board-grid__coll';
+        this.collClassName = 'board-grid__coll';
+        this.collSelector = '.' + this.collClassName;
         // Для элементов перетакскиваемых по доске
         this.dragableCard = null;
 
@@ -31,6 +32,10 @@ export default class BoardGrid {
 
         let coll = event.target;
         coll.classList.remove('board-grid__coll_state_over');
+
+        if (! coll.classList.contains(this.collClassName)) {
+            return false;
+        }
 
         // Если в ячейке уже присутсвует элемент то добавить не добавлять новый
         if (coll.innerHTML) {
