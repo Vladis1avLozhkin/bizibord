@@ -18,7 +18,14 @@ export default class BoardGrid {
 
     handleDrop(event) {
         event.preventDefault();
-        console.log('drop');
+        event.dataTransfer.dropEffect = 'move';
+
+        let cardId = event.dataTransfer.getData('text');
+        let originalCard = document.getElementById(cardId);
+        let card = originalCard.cloneNode(true);
+        card.id = ""
+
+        event.target.appendChild(card);
     }
 
     drugHanding() {

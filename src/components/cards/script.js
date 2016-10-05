@@ -8,9 +8,7 @@ export default class Cards {
 
         card.classList.add('cards__item_draggable');
 
-        event.dataTransfer.dropEffect = 'copy';
-        event.dataTransfer.setData('text/html', card);
-        console.log(card);
+        event.dataTransfer.setData("text", card.id);
     }
 
     handleDragEnd(event) {
@@ -24,6 +22,7 @@ export default class Cards {
             console.log(card)
             card.addEventListener('dragstart', this.handleDragStart, false);
             card.addEventListener('dragend', this.handleDragEnd, false);
+            card.addEventListener('dragenter', this.handleDragEnd, false);
         });
     }
 }
