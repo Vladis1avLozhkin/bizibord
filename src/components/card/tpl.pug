@@ -1,5 +1,5 @@
 mixin card(width, height)
     - var mod = "card_size_" + width + "x" + height
     - var id = "card-" + width + "x" + height
-    div(class="card " + mod  id="" + id draggable="true")
+    div(class="card " + mod  id=id draggable="true" data-width=width data-height=height)
         button.card__remove-btn
