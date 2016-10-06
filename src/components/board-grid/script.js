@@ -119,7 +119,6 @@ export default class BoardGrid {
         let cardHeigh = originalCard.dataset.height;
 
         if ( ! this.validateCardPos(colX, colY, cardWidth, cardHeigh)) {
-            this.dragableCard = null;
             return false
         }
 
@@ -170,6 +169,7 @@ export default class BoardGrid {
 
         // Особождать предыдущюу позизию карточки
         let col = card.parentNode;
+        col.remove
         this.gridUpdate(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
         event.dataTransfer.setData("text", card.dataset.id);
     }
