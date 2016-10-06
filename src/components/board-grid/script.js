@@ -20,10 +20,6 @@ export default class BoardGrid {
         });
     }
 
-    validateCardPos(colX, colY, cardWidth, cardHeigh) {
-        return true
-    }
-
     getCoordsArray(colX, colY, cardWidth, cardHeigh) {
         let coords = [];
         for (let y = 0; y < cardHeigh; ++y) {
@@ -38,9 +34,34 @@ export default class BoardGrid {
         return coords;
     }
 
-    gridAddItem(colX, colY, cardWidth, cardHeigh) {
-        console.log('colX', colX, 'colY', colY, 'cardWidth', cardWidth, 'cardHeigh', cardHeigh);
+    validateCardPos(colX, colY, cardWidth, cardHeigh) {
+        // Получить координаты занимаемых ячеек
+        let heldCols = this.getCoordsArray(colX, colY, cardWidth, cardHeigh);
+        let isColsMatch = false;
 
+        // Получить занятые ячейки
+        let busyCols = this.grid.filter((item) => {
+            return item.busy;
+        });
+
+        for (let i = 0; i < heldCols.length; ++i) {
+            let col = heldCols[i];
+
+            let colsMatch = busyCols.filter((item) => {
+                return item.x == col.x && item.y == col.y
+            });
+
+            if (colsMatch.length > 0) {
+                isColsMatch = true;
+                break
+            }
+        }
+
+        // Если есть занятые ячейки
+        return ! isColsMatch;
+    }
+
+    gridAddItem(colX, colY, cardWidth, cardHeigh) {
         // Собрать массив с координатоми занимаемых ячеек
         let busyCols = this.getCoordsArray(colX, colY, cardWidth, cardHeigh);
 
@@ -54,8 +75,6 @@ export default class BoardGrid {
                 }
             });
         });
-
-        console.log(this.grid);
     }
 
     gridRemoveItem(colX, colY, cardWidth, cardHeigh) {
