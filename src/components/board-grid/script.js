@@ -164,12 +164,15 @@ export default class BoardGrid {
 
     dragCardStart(event) {
         let card = event.target;
-        card.classList.add('card_draggable');
+
+        // Фикс для хрома, при манипуляции с DOM перетаскиваемого элемента
+        // мнгновенно всплывает сообытие dragend
+        setTimeout(() => { card.classList.add('card_draggable') }, 10);
+
         this.dragableCard = card;
 
         // Особождать предыдущюу позизию карточки
         let col = card.parentNode;
-        col.remove
         this.gridUpdate(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
         event.dataTransfer.setData("text", card.dataset.id);
     }
