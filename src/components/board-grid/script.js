@@ -37,7 +37,20 @@ export default class BoardGrid {
     validateCardPos(colX, colY, cardWidth, cardHeigh) {
         // Получить координаты занимаемых ячеек
         let heldCols = this.getCoordsArray(colX, colY, cardWidth, cardHeigh);
-        let isColsMatch = false;
+        let validationStatus = true;
+
+        // Есть ли ячейки выходящие за пределы координак сетку
+        let nonexistentCol = heldCols.filter((col) => {
+            let colsMath = this.grid.filter((item) => {
+                return item.x == col.x && item.y == col.y
+            });
+
+            return colsMath.length === 0;
+        });
+
+        if (nonexistentCol.length > 0) {
+            return false;
+        }
 
         // Получить занятые ячейки
         let busyCols = this.grid.filter((item) => {
@@ -52,12 +65,12 @@ export default class BoardGrid {
             });
 
             if (colsMatch.length > 0) {
-                isColsMatch = true;
+                validationStatus = false;
                 break
             }
         }
 
-        return ! isColsMatch;
+        return validationStatus;
     }
 
     gridUpdate(colX, colY, cardWidth, cardHeigh)  {
