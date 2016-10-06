@@ -109,8 +109,6 @@ export default class BoardGrid {
         coll.classList.remove('board-grid__coll_state_over');
 
         if (! coll.classList.contains(this.collClassName)) { return false; }
-        // Если в ячейке уже присутсвует элемент то добавить не добавлять новый
-        if (coll.innerHTML) { return false; }
 
         let cardId = event.dataTransfer.getData('text');
         let originalCard = document.getElementById(cardId);
@@ -120,7 +118,10 @@ export default class BoardGrid {
         let cardWidth = originalCard.dataset.width;
         let cardHeigh = originalCard.dataset.height;
 
-        if ( ! this.validateCardPos(colX, colY, cardWidth, cardHeigh)) { return false }
+        if ( ! this.validateCardPos(colX, colY, cardWidth, cardHeigh)) {
+            this.dragableCard = null;
+            return false
+        }
 
         // Добавлене карточки на сетку
         let card = originalCard.cloneNode(true);
@@ -132,6 +133,14 @@ export default class BoardGrid {
         this.handingCardEvent(card);
 
         this.gridUpdate(colX, colY, cardWidth, cardHeigh);
+        this.removeDragableCard();
+    }
+
+    removeDragableCard() {
+        if (this.dragableCard) {
+            this.dragableCard.remove();
+            this.dragableCard = null;
+        }
     }
 
     handingCardEvent(card) {
@@ -162,16 +171,10 @@ export default class BoardGrid {
         // Особождать предыдущюу позизию карточки
         let col = card.parentNode;
         this.gridUpdate(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
-
         event.dataTransfer.setData("text", card.dataset.id);
     }
 
-    dragCardEnter() {
-        if (this.dragableCard) {
-            this.dragableCard.remove();
-            this.dragableCard = null;
-        }
-    }
+    dragCardEnter() {}
 
     dragCardEnd(event) {
         event.target.classList.remove('card_draggable');
