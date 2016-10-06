@@ -39,7 +39,7 @@ export default class BoardGrid {
         let heldCols = this.getCoordsArray(colX, colY, cardWidth, cardHeigh);
         let validationStatus = true;
 
-        // Есть ли ячейки выходящие за пределы координак сетку
+        // Собрать ячейки выходящие за пределы координа сетки
         let nonexistentCol = heldCols.filter((col) => {
             let colsMath = this.grid.filter((item) => {
                 return item.x == col.x && item.y == col.y
@@ -66,6 +66,7 @@ export default class BoardGrid {
 
             if (colsMatch.length > 0) {
                 validationStatus = false;
+
                 break
             }
         }
@@ -164,15 +165,14 @@ export default class BoardGrid {
 
     dragCardStart(event) {
         let card = event.target;
+        let col = card.parentNode;
+        this.dragableCard = card;
 
         // Фикс для хрома, при манипуляции с DOM перетаскиваемого элемента
         // мнгновенно всплывает сообытие dragend
         setTimeout(() => { card.classList.add('card_draggable') }, 10);
 
-        this.dragableCard = card;
-
         // Особождать предыдущюу позизию карточки
-        let col = card.parentNode;
         this.gridUpdate(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
         event.dataTransfer.setData("text", card.dataset.id);
     }
@@ -180,6 +180,13 @@ export default class BoardGrid {
     dragCardEnter() {}
 
     dragCardEnd(event) {
-        event.target.classList.remove('card_draggable');
+        let card = event.target;
+        let col = card.parentNode;
+
+        if (col) {
+            this.gridUpdate(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
+        }
+
+        card.classList.remove('card_draggable');
     }
 }
