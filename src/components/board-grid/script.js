@@ -146,6 +146,10 @@ export default class BoardGrid {
         card.classList.add('card_draggable');
         this.dragableCard = card;
 
+        // Особождать предыдущюу позизию карточки
+        let col = card.parentNode;
+        this.gridUpdate(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
+
         event.dataTransfer.setData("text", card.dataset.id);
     }
 
