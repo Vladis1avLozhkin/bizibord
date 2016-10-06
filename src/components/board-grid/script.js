@@ -57,7 +57,6 @@ export default class BoardGrid {
             }
         }
 
-        // Если есть занятые ячейки
         return ! isColsMatch;
     }
 
@@ -78,7 +77,19 @@ export default class BoardGrid {
     }
 
     gridRemoveItem(colX, colY, cardWidth, cardHeigh) {
-        console.log(colX, colY, cardWidth, cardHeigh);
+        // Собрать массив с координатоми занимаемых ячеек
+        let busyCols = this.getCoordsArray(colX, colY, cardWidth, cardHeigh);
+
+        // Отметить НЕ занятые ячейки
+        busyCols.forEach(currentCol => {
+            this.grid.map((item) => {
+                if (currentCol) {
+                    if (item.x == currentCol.x && item.y == currentCol.y) {
+                        item.busy = false;
+                    }
+                }
+            });
+        });
     }
 
     handleDragOver(event) {
@@ -132,7 +143,9 @@ export default class BoardGrid {
 
     removeCardEventHandler(card) {
         let removeBtn = card.querySelector('.card__remove-btn');
-            removeBtn.addEventListener('click', () => {
+        removeBtn.addEventListener('click', () => {
+            let col = card.parentNode;
+            this.gridRemoveItem(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
             card.remove();
         });
     }
