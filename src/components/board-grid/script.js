@@ -47,7 +47,6 @@ export default class BoardGrid {
         });
 
         this.grid = this.cleanGrid;
-        console.log(this.grid);
     }
 
     validateCardPos(colX, colY, cardWidth, cardHeigh) {
@@ -58,7 +57,7 @@ export default class BoardGrid {
         // Собрать ячейки выходящие за пределы координа сетки
         let nonexistentCol = heldCols.filter((col) => {
             let colsMath = this.grid.filter((item) => {
-                return item.x == col.x && item.y == col.y
+                return item.x == col.x && item.y == col.y;
             });
 
             return colsMath.length === 0;
@@ -77,13 +76,13 @@ export default class BoardGrid {
             let col = heldCols[i];
 
             let colsMatch = busyCols.filter((item) => {
-                return item.x == col.x && item.y == col.y
+                return item.x == col.x && item.y == col.y;
             });
 
             if (colsMatch.length > 0) {
                 validationStatus = false;
 
-                break
+                break;
             }
         }
 
@@ -136,13 +135,13 @@ export default class BoardGrid {
         let cardHeigh = originalCard.dataset.height;
 
         if ( ! this.validateCardPos(colX, colY, cardWidth, cardHeigh)) {
-            return false
+            return false;
         }
 
         // Добавлене карточки на сетку
         let card = originalCard.cloneNode(true);
         card.dataset.id = card.id;
-        card.id = ""
+        card.id = "";
         card.classList.add('card_in-grid');
         card.classList.remove('card_draggable');
         coll.appendChild(card);
@@ -150,6 +149,8 @@ export default class BoardGrid {
 
         this.gridUpdate(colX, colY, cardWidth, cardHeigh);
         this.removeDragableCard();
+
+        return true;
     }
 
     removeDragableCard() {
@@ -186,7 +187,7 @@ export default class BoardGrid {
 
         // Фикс для хрома, при манипуляции с DOM перетаскиваемого элемента
         // мнгновенно всплывает сообытие dragend
-        setTimeout(() => { card.classList.add('card_draggable') }, 10);
+        setTimeout(() => { card.classList.add('card_draggable'); }, 10);
 
         // Особождать предыдущюу позизию карточки
         this.gridUpdate(col.dataset.x, col.dataset.y, card.dataset.width, card.dataset.height);
