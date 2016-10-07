@@ -5,19 +5,25 @@ export default class BoardGrid {
         this.collSelector = '.' + this.collClassName;
         // Для элементов перетакскиваемых по доске
         this.dragableCard = null;
-        this.grid = [];
+        this.cols = document.querySelectorAll(this.collSelector);
+        this.grid = this.cleanGrid;
 
-        let colls = document.querySelectorAll(this.collSelector);
-
-        Array.prototype.forEach.call(colls, (coll, i) => {
-            coll.addEventListener('dragover', this.handleDragOver, false);
-            coll.addEventListener('dragleave', this.handleDragLeave, false);
-            coll.addEventListener('drop', this.handleDrop.bind(this));
+        Array.prototype.forEach.call(this.cols, (col, i) => {
+            col.addEventListener('dragover', this.handleDragOver, false);
+            col.addEventListener('dragleave', this.handleDragLeave, false);
+            col.addEventListener('drop', this.handleDrop.bind(this));
         });
 
-        Array.prototype.forEach.call(colls, (coll, i) => {
-            this.grid.push({x: coll.dataset.x, y: coll.dataset.y, busy: false});
+    }
+
+    get cleanGrid() {
+        let grid = [];
+
+        Array.prototype.forEach.call(this.cols, (col, i) => {
+            grid.push({x: col.dataset.x, y: col.dataset.y, busy: false});
         });
+
+        return grid;
     }
 
     getCoordsArray(colX, colY, cardWidth, cardHeigh) {
@@ -32,6 +38,16 @@ export default class BoardGrid {
         }
 
         return coords;
+    }
+
+    clearBoard() {
+        let cards = document.querySelectorAll(this.collSelector + ' .card');
+        Array.prototype.forEach.call(cards, (card, i) => {
+            card.remove();
+        });
+
+        this.grid = this.cleanGrid;
+        console.log(this.grid);
     }
 
     validateCardPos(colX, colY, cardWidth, cardHeigh) {

@@ -9,6 +9,11 @@ export default class Cards {
         });
     }
 
+    clearBtnHanding(handler) {
+        let clearBtn = document.querySelector('.clear-board-btn');
+        clearBtn.addEventListener('click', handler);
+    }
+
     handleDragStart(event) {
         let card = event.target;
         card.classList.add('card_draggable');
