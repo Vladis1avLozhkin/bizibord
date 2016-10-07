@@ -16,7 +16,7 @@ export default class Cards {
 
     handleDragStart(event) {
         let card = event.target;
-        card.classList.add('card_draggable');
+        setTimeout(() => { card.classList.add('card_draggable'); }, 10);
         event.dataTransfer.setData("text", card.id);
     }
 
