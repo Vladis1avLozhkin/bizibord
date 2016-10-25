@@ -14,6 +14,8 @@ export default class BoardGrid {
             col.addEventListener('drop', this.handleDrop.bind(this));
         });
 
+        this.fethcCards();
+
     }
 
     get cleanGrid() {
@@ -26,9 +28,20 @@ export default class BoardGrid {
         return grid;
     }
 
+    fethcCards() {
+        fetch('/server.json')
+            .then(function(response) {
+                return response.json()
+            }).then(function(json) {
+                console.log('parsed json', json)
+            }).catch(function(ex) {
+                console.log('parsing failed', ex)
+            });
+    }
+
     save() {
         // Получить все карточки на доске
-        let cards = document.querySelectorAll('.board__grid .card')
+        let cards = document.querySelectorAll('.board-grid .card')
 
         // Собрать данные для отправки
         let data = [];
@@ -42,7 +55,7 @@ export default class BoardGrid {
 
         console.log(data);
 
-        fetch('http://localhost:4444/save', {
+        fetch('/save', {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
