@@ -3,12 +3,16 @@
         "id": 1,
         "width": 1,
         "height": 2,
-        "src": "http://www.sunhome.ru/UsersGallery/Cards/62/3200734.jpg"
+        "src": "http://www.sunhome.ru/UsersGallery/Cards/62/3200734.jpg",
+        "x": 0,
+        "y": 0
     },
     {
         "id": 1,
         "width": 1,
         "height": 2,
-        "src": "http://www.sunhome.ru/UsersGallery/Cards/62/3200734.jpg"
+        "src": "http://www.sunhome.ru/UsersGallery/Cards/62/3200734.jpg",
+        "x": 2,
+        "y": 2
     }
 ]

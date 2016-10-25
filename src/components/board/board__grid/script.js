@@ -15,7 +15,6 @@ export default class BoardGrid {
         });
 
         this.fethcCards();
-
     }
 
     get cleanGrid() {
@@ -30,13 +29,49 @@ export default class BoardGrid {
 
     fethcCards() {
         fetch('/server.json')
-            .then(function(response) {
+            .then((response) => {
                 return response.json()
-            }).then(function(json) {
-                console.log('parsed json', json)
-            }).catch(function(ex) {
-                console.log('parsing failed', ex)
+            }).then((json) => {
+                this.addCards(json);
             });
+    }
+
+    addCards(cardsData) {
+        cardsData.forEach((cardData) => {
+            this.addCard(cardData);
+        });
+    }
+
+    addCard(data) {
+        let x = data.x;
+        let y = data.y;
+        let coll = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+
+        // Добавлене карточки на сетку
+        let card = document.createElement('div');
+
+        card.dataset.id = data.id;
+        card.dataset.x = data.x;
+        card.dataset.y = data.y;
+        card.classList.add('card');
+        card.classList.add(`card_size_${data.width}x${data.height}`);
+        card.classList.add('card_in-grid');
+        card.classList.remove('card_draggable');
+
+        let image = document.createElement('img');
+        image.src = data.src;
+
+        let removeBtn = document.createElement('button');
+        removeBtn.classList.add('card__remove-btn');
+
+        card.appendChild(image);
+        card.appendChild(removeBtn);
+
+        coll.appendChild(card);
+        this.handingCardEvent(card);
+
+        this.gridUpdate(x, y, data.width, data.height);
+        this.removeDragableCard();
     }
 
     save() {
