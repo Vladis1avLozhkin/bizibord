@@ -7,6 +7,7 @@ export default class BoardGrid {
         this.dragableCard = null;
         this.cols = document.querySelectorAll(this.collSelector);
         this.grid = this.cleanGrid;
+        this.cardSize = 20;
 
         Array.prototype.forEach.call(this.cols, (col, i) => {
             col.addEventListener('dragover', this.handleDragOver, false);
@@ -53,14 +54,18 @@ export default class BoardGrid {
         card.dataset.id = data.id;
         card.dataset.x = data.x;
         card.dataset.y = data.y;
+        card.setAttribute('draggable', 'true');
+        card.dataset.width = data.width;
+        card.dataset.height = data.height;
+        card.style.height = data.height * this.cardSize + 'px';
+        card.style.width = data.width * this.cardSize + 'px';
         card.classList.add('card');
-        card.classList.add(`card_size_${data.width}x${data.height}`);
         card.classList.add('card_in-grid');
         card.classList.remove('card_draggable');
 
         let image = document.createElement('img');
         image.src = data.src;
-
+        image.setAttribute('draggable', 'true');
         let removeBtn = document.createElement('button');
         removeBtn.classList.add('card__remove-btn');
 
@@ -76,7 +81,7 @@ export default class BoardGrid {
 
     save() {
         // Получить все карточки на доске
-        let cards = document.querySelectorAll('.board-grid .card')
+        let cards = document.querySelectorAll('.board__grid .card')
 
         // Собрать данные для отправки
         let data = [];
@@ -206,6 +211,10 @@ export default class BoardGrid {
         let cardId = event.dataTransfer.getData('text');
         let originalCard = document.getElementById(cardId);
 
+        if (!originalCard) {
+            originalCard = document.querySelector(`[data-id="${cardId}"]`);
+        }
+
         let colX = coll.dataset.x;
         let colY = coll.dataset.y;
         let cardWidth = originalCard.dataset.width;
@@ -217,7 +226,11 @@ export default class BoardGrid {
 
         // Добавлене карточки на сетку
         let card = originalCard.cloneNode(true);
-        card.dataset.id = card.id;
+
+        if (card.id) {
+            card.dataset.id = card.id;
+        }
+
         card.dataset.x = colX;
         card.dataset.y = colY;
         card.id = "";

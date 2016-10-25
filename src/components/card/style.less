@@ -7,6 +7,12 @@
 
     img {
         width: 100%;
+        user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
     }
 
     &_size_2x1 {
@@ -63,6 +69,7 @@
     top: 0;
     left: 0;
     z-index: 1;
+    overflow: hidden;
     height: @card-size;
     width: @card-size;
 
