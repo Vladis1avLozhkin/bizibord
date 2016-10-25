@@ -8,6 +8,8 @@ export default class Cards {
             card.addEventListener('dragend', this.handleDragEnd, false);
         });
 
+        this.cardSize = 10;
+
         this.fethcCards();
     }
 
@@ -57,8 +59,10 @@ export default class Cards {
         card.setAttribute('draggable', 'true');
         card.dataset.width = data.width;
         card.dataset.height = data.height;
+
         card.style.height = data.height * this.cardSize + 'px';
         card.style.width = data.width * this.cardSize + 'px';
+
         card.classList.add('card');
         card.classList.remove('card_draggable');
 
