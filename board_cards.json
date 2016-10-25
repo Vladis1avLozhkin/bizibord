@@ -3,15 +3,15 @@
         "id": 1,
         "width": 8,
         "height": 6,
-        "src": "http://www.sunhome.ru/UsersGallery/Cards/62/3200734.jpg",
+        "src": "/images/3200734.jpg",
         "x": 0,
         "y": 0
     },
     {
         "id": 2,
         "width": 8,
-        "height": 4,
-        "src": "http://www.sunhome.ru/UsersGallery/Cards/62/3200734.jpg",
+        "height": 12,
+        "src": "/images/Minion-Characters-background.png",
         "x": 9,
         "y": 9
     }

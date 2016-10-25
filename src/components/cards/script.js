@@ -7,6 +7,8 @@ export default class Cards {
             card.addEventListener('dragstart', this.handleDragStart, false);
             card.addEventListener('dragend', this.handleDragEnd, false);
         });
+
+        this.fethcCards();
     }
 
     clearBtnHanding(handler) {
@@ -27,6 +29,51 @@ export default class Cards {
 
     handleDragEnd(event) {
         event.target.classList.remove('card_draggable');
+    }
+
+    fethcCards() {
+        fetch('/board_cards.json')
+            .then((response) => {
+                return response.json()
+            }).then((json) => {
+                this.addCards(json);
+            });
+    }
+
+    addCards(cardsData) {
+        cardsData.forEach((cardData) => {
+            this.addCard(cardData);
+        });
+    }
+
+    addCard(data) {
+        console.log(data);
+        let cards = document.querySelector('.cards');
+
+        // Добавлене карточки в сайдбар
+        let card = document.createElement('div');
+
+        card.id = data.id;
+        card.setAttribute('draggable', 'true');
+        card.dataset.width = data.width;
+        card.dataset.height = data.height;
+        card.style.height = data.height * this.cardSize + 'px';
+        card.style.width = data.width * this.cardSize + 'px';
+        card.classList.add('card');
+        card.classList.remove('card_draggable');
+
+        card.addEventListener('dragstart', this.handleDragStart, false);
+        card.addEventListener('dragend', this.handleDragEnd, false);
+
+        let image = document.createElement('img');
+        image.src = data.src;
+        image.setAttribute('draggable', 'false');
+        let removeBtn = document.createElement('button');
+        removeBtn.classList.add('card__remove-btn');
+
+        card.appendChild(image);
+        card.appendChild(removeBtn);
+        cards.appendChild(card);
     }
 }
 

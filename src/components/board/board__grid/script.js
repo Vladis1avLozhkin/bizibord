@@ -29,7 +29,7 @@ export default class BoardGrid {
     }
 
     fethcCards() {
-        fetch('/server.json')
+        fetch('/board_cards.json')
             .then((response) => {
                 return response.json()
             }).then((json) => {
@@ -65,7 +65,7 @@ export default class BoardGrid {
 
         let image = document.createElement('img');
         image.src = data.src;
-        image.setAttribute('draggable', 'true');
+        image.setAttribute('draggable', 'false');
         let removeBtn = document.createElement('button');
         removeBtn.classList.add('card__remove-btn');
 
