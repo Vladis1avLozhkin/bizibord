@@ -57,8 +57,10 @@ export default class BoardGrid {
         card.setAttribute('draggable', 'true');
         card.dataset.width = data.width;
         card.dataset.height = data.height;
+
         card.style.height = data.height * this.cardSize + 'px';
         card.style.width = data.width * this.cardSize + 'px';
+
         card.classList.add('card');
         card.classList.add('card_in-grid');
         card.classList.remove('card_draggable');
@@ -231,7 +233,11 @@ export default class BoardGrid {
             card.dataset.id = card.id;
         }
 
-        card.dataset.x = colX;
+
+        card.style.width = cardWidth * this.cardSize + 'px';
+        card.style.height = cardHeigh * this.cardSize + 'px';
+
+        card.dataset.y = colY;
         card.dataset.y = colY;
         card.id = "";
         card.classList.add('card_in-grid');

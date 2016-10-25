@@ -49,7 +49,6 @@ export default class Cards {
     }
 
     addCard(data) {
-        console.log(data);
         let cards = document.querySelector('.cards');
 
         // Добавлене карточки в сайдбар
