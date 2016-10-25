@@ -1,9 +1,9 @@
-mixin board-grid(countX, countY)
-    .board-grid
+mixin board__grid(countX, countY)
+    .board__grid
         - for (var y = 0; y < countY; y++)
-            .board-grid__row
+            .board__grid-row
                 - var currentCounterX = 0
                 while currentCounterX < countX
-                    .board-grid__coll(data-y=y data-x=currentCounterX)
+                    .board__grid-coll(data-y=y data-x=currentCounterX)
                     - currentCounterX++
 

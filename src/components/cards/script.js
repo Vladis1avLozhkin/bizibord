@@ -14,6 +14,11 @@ export default class Cards {
         clearBtn.addEventListener('click', handler);
     }
 
+    saveBtnHanding(handler) {
+        let saveBtn = document.querySelector('.btn--save-board');
+        saveBtn.addEventListener('click', handler);
+    }
+
     handleDragStart(event) {
         let card = event.target;
         setTimeout(() => { card.classList.add('card_draggable'); }, 10);

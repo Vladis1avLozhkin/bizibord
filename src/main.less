@@ -2,7 +2,7 @@
 
 @base-padding: 20px;
 @bd-color: #D2D7D3;
-@card-size: 90px;
+@card-size: 20px;
 @small-card-size: 50px;
 // Pages
 
@@ -10,13 +10,25 @@
 @import "./containers/bizibord/style.less";
 
 // Components
-@import "./components/board-grid/style.less";
 @import "./components/board/style.less";
-@import "./components/board/style.less";
+@import "./components/board/board__grid/style.less";
 @import "./components/card/style.less";
 @import "./components/cards/style.less";
 
 html, body {
     height: 100%;
+}
+
+.btn {
+    &--save-board {
+        background: #00B16A;
+        border: 1px solid #1E824C;
+        flex-basis: 100%;
+        margin-bottom: 1em;
+        cursor: pointer;
+        height: 40px;
+        color: #fff;
+        border-radius: 4px;
+    }
 }
 

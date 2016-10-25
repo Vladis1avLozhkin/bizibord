@@ -1,7 +1,7 @@
 export default class BoardGrid {
 
     constructor() {
-        this.collClassName = 'board-grid__coll';
+        this.collClassName = 'board__grid-coll';
         this.collSelector = '.' + this.collClassName;
         // Для элементов перетакскиваемых по доске
         this.dragableCard = null;
@@ -20,10 +20,36 @@ export default class BoardGrid {
         let grid = [];
 
         Array.prototype.forEach.call(this.cols, (col, i) => {
-            grid.push({x: col.dataset.x, y: col.dataset.y, busy: false});
+            grid.push({x: col.dataset.x, y: col.dataset.y, busy: false, cardId: null});
         });
 
         return grid;
+    }
+
+    save() {
+        // Получить все карточки на доске
+        let cards = document.querySelectorAll('.board__grid .card')
+
+        // Собрать данные для отправки
+        let data = [];
+        Array.prototype.forEach.call(cards, (card) => {
+            data.push({
+                id: card.dataset.id,
+                x: card.dataset.x,
+                y: card.dataset.y
+            });
+        });
+
+        console.log(data);
+
+        fetch('http://localhost:4444/save', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
     }
 
     getCoordsArray(colX, colY, cardWidth, cardHeigh) {
@@ -50,9 +76,10 @@ export default class BoardGrid {
     }
 
     validateCardPos(colX, colY, cardWidth, cardHeigh) {
+        let validationStatus = true;
+
         // Получить координаты занимаемых ячеек
         let heldCols = this.getCoordsArray(colX, colY, cardWidth, cardHeigh);
-        let validationStatus = true;
 
         // Собрать ячейки выходящие за пределы координа сетки
         let nonexistentCol = heldCols.filter((col) => {
@@ -110,21 +137,23 @@ export default class BoardGrid {
         event.preventDefault();
 
         let coll = event.target;
-        coll.classList.add('board-grid__coll_state_over');
+        coll.classList.add('board__grid-coll_state_over');
     }
 
     handleDragLeave(event) {
         let coll = event.target;
-        coll.classList.remove('board-grid__coll_state_over');
+        coll.classList.remove('board__grid-coll_state_over');
     }
 
     handleDrop(event) {
         event.preventDefault();
 
         let coll = event.target;
-        coll.classList.remove('board-grid__coll_state_over');
+        coll.classList.remove('board__grid-coll_state_over');
 
-        if (! coll.classList.contains(this.collClassName)) { return false; }
+        if (! coll.classList.contains(this.collClassName)) {
+            return false;
+        }
 
         let cardId = event.dataTransfer.getData('text');
         let originalCard = document.getElementById(cardId);
@@ -141,6 +170,8 @@ export default class BoardGrid {
         // Добавлене карточки на сетку
         let card = originalCard.cloneNode(true);
         card.dataset.id = card.id;
+        card.dataset.x = colX;
+        card.dataset.y = colY;
         card.id = "";
         card.classList.add('card_in-grid');
         card.classList.remove('card_draggable');
