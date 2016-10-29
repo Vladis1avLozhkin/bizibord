@@ -1,4 +1,4 @@
-export default class BoardTypes {
+export default class BoardSettings {
     constructor(changeBoardTypeHandler) {
         this.listenEvents();
         this.changeBoardTypeHandler = changeBoardTypeHandler || null;
@@ -7,8 +7,8 @@ export default class BoardTypes {
     }
 
     listenEvents() {
-        let inputs = document.querySelectorAll('.board-types__input');
-        let labels = document.querySelectorAll('.board-types__item');
+        let inputs = document.querySelectorAll('.board-settings__type-input');
+        let labels = document.querySelectorAll('.board-settings__type');
 
         Array.prototype.forEach.call(inputs, (input) => {
             input.addEventListener('change', (e) => {
@@ -17,22 +17,22 @@ export default class BoardTypes {
                 }
 
                 Array.prototype.forEach.call(labels, (label) => {
-                    label.classList.remove('board-types__item--active');
+                    label.classList.remove('board-settings__type--active');
                 });
 
                 let label = e.target.parentNode;
-                label.classList.add('board-types__item--active');
+                label.classList.add('board-settings__type--active');
             });
 
         });
     }
 
     setDefaultType() {
-        let inputs = document.querySelectorAll('.board-types__input');
+        let inputs = document.querySelectorAll('.board-settings__type-input');
 
         Array.prototype.forEach.call(inputs, (input) => {
             if (input.checked) {
-                input.parentNode.classList.add('board-types__item--active');
+                input.parentNode.classList.add('board-settings__types--active');
 
                 if (this.changeBoardTypeHandler) {
                     this.changeBoardTypeHandler(input.value);
