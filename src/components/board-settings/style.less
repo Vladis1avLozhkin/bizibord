@@ -1,5 +1,10 @@
 .board-settings {
 
+    &__title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
     &__types {
         display: flex;
     }
@@ -32,6 +37,47 @@
         position: absolute;
         top: -30px;
         left: -30px;
+    }
+
+    &__backgrounds {
+        display: flex;
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    &__background {
+        width: 30px;
+        height: 30px;
+        background: #eee;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+
+        position: relative;
+        overflow: hidden;
+
+
+        &-input {
+            position: absolute;
+            top: -30px;
+            left: -30px;
+        }
+
+        &--active {
+            box-shadow: 0 0 2px 1px #455A64;
+        }
+
+        &--green {
+            background: #A5D6A7;
+        }
+
+        &--gray {
+            background: #eee;
+        }
+
+        &--blue {
+            background: #42A5F5;
+        }
     }
 
 }

@@ -1,12 +1,18 @@
 export default class BoardSettings {
-    constructor(changeBoardTypeHandler) {
+    constructor(changeBoardTypeHandler, changeBoardBackgroundHandler) {
         this.listenEvents();
         this.changeBoardTypeHandler = changeBoardTypeHandler || null;
+        this.changeBoardBackgroundHandler = changeBoardBackgroundHandler || null;
 
         this.setDefaultType();
     }
 
     listenEvents() {
+        this.listenEventsBoardType();
+        this.listenEventsBoardBackgound();
+    }
+
+    listenEventsBoardType() {
         let inputs = document.querySelectorAll('.board-settings__type-input');
         let labels = document.querySelectorAll('.board-settings__type');
 
@@ -25,6 +31,27 @@ export default class BoardSettings {
             });
 
         });
+    }
+
+    listenEventsBoardBackgound() {
+        let inputs = document.querySelectorAll('.board-settings__background-input');
+        let labels = document.querySelectorAll('.board-settings__background');
+
+        Array.prototype.forEach.call(inputs, (input) => {
+            input.addEventListener('change', (e) => {
+                if (this.changeBoardBackgroundHandler) {
+                    this.changeBoardBackgroundHandler(e.target.value);
+                }
+
+                Array.prototype.forEach.call(labels, (label) => {
+                    label.classList.remove('board-settings__background--active');
+                });
+
+                let label = e.target.parentNode;
+                label.classList.add('board-settings__background--active');
+            });
+        });
+
     }
 
     setDefaultType() {

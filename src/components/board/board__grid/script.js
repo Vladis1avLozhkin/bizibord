@@ -31,14 +31,35 @@ export default class BoardGrid {
     changeBoardTypeHandler(type) {
         let grids = document.querySelectorAll('.board__grid');
         Array.prototype.forEach.call(grids, (grid) => {
-            console.log(grid.classList);
             if (grid.classList.contains('board__grid--' + type)) {
                 grid.classList.add('board__grid--active');
             } else {
                 grid.classList.remove('board__grid--active');
             }
         });
-        console.log(type);
+    }
+
+    changeBoardBackgroundHandler(bg) {
+        let grids = document.querySelectorAll('.board__grid');
+
+        Array.prototype.forEach.call(grids, (grid) => {
+            grid.classList.forEach((className) => {
+                let classSegmets = className.split('--');
+                let mod = classSegmets[1];
+
+                if (mod) {
+                    let modSegments = mod.split('-');
+                    let modName = modSegments[0];
+
+                    if (modName === 'bg') {
+                        grid.classList.remove(className);
+                        console.log(className);
+                    }
+                }
+            });
+
+            grid.classList.add('board__grid--bg-' + bg);
+        });
     }
 
     fethcCards() {

@@ -1,6 +1,19 @@
 .board-settings
-    section.board-settings__types
+
+    h3.board-settings__title Размер доски:
+    .board-settings__types
         label.board-settings__type.board-settings__type--square
             input.board-settings__type-input(type="radio" name="board-type" value="square")
         label.board-settings__type.board-settings__type--rectangle
             input.board-settings__type-input(type="radio" name="board-type" value="rectangle")
+
+
+    h3.board-settings__title Фон доски:
+    .board-settings__backgrounds
+        label.board-settings__background.board-settings__background--blue
+            input.board-settings__background-input(type="radio" name="board-background" value="blue")
+        label.board-settings__background.board-settings__background--gray
+            input.board-settings__background-input(type="radio" name="board-background" value="gray")
+        label.board-settings__background.board-settings__background--green
+            input.board-settings__background-input(type="radio" name="board-background" value="green")
+
