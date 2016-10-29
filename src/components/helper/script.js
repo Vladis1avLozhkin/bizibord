@@ -50,8 +50,6 @@ export default class Helper {
     setContent() {
         let step = this.currentStep;
 
-        let helperTitle = document.querySelector('.helper__title');
-        helperTitle.innerHTML = step.title;
         let helperContent = document.querySelector('.helper__content');
         helperContent.innerHTML = step.content();
     }
@@ -60,12 +58,16 @@ export default class Helper {
         let nextBtn = document.querySelector('.helper__btn--next');
         let prevBtn = document.querySelector('.helper__btn--prev');
 
-        nextBtn.addEventListener('click', () => {
-            this.next();
-        });
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                this.next();
+            });
+        }
 
-        prevBtn.addEventListener('click', () => {
-            this.prev();
-        });
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                this.prev();
+            });
+        }
     }
 }
