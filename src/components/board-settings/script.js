@@ -4,7 +4,7 @@ export default class BoardSettings {
         this.changeBoardTypeHandler = changeBoardTypeHandler || null;
         this.changeBoardBackgroundHandler = changeBoardBackgroundHandler || null;
 
-        this.setDefaultType();
+        this.setDefaultSetting();
     }
 
     listenEvents() {
@@ -54,10 +54,10 @@ export default class BoardSettings {
 
     }
 
-    setDefaultType() {
-        let inputs = document.querySelectorAll('.board-settings__type-input');
+    setDefaultSetting() {
+        let typeInputs = document.querySelectorAll('.board-settings__type-input');
 
-        Array.prototype.forEach.call(inputs, (input) => {
+        Array.prototype.forEach.call(typeInputs, (input) => {
             if (input.checked) {
                 input.parentNode.classList.add('board-settings__types--active');
 
