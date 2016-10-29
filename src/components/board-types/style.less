@@ -1,0 +1,35 @@
+.board-types {
+    display: flex;
+
+    &__input {
+        position: absolute;
+        top: -30px;
+        left: -30px;
+    }
+
+    &__item {
+        background: #eee;
+        border: 1px solid #D2D7D3;
+        height: 40px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+
+        margin-right: 10px;
+
+        &--active {
+            background: #00B16A;
+            border-color: #00B16A;
+        }
+
+        &--rectangle {
+            width: 70px;
+        }
+
+        &--square {
+            width: 40px;
+        }
+    }
+
+}
+

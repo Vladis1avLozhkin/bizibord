@@ -3,7 +3,10 @@ extends ../layouts/layout.pug
 block content
 
     section.wrapper
-        section.sidebar
+        aside.sidebar
+            h4 Тип доски:
+            include ../components/board-types/tpl.pug
+
             include ../components/cards/tpl.pug
         main.main
             include ../components/board/tpl.pug

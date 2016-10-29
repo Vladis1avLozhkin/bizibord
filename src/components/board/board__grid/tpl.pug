@@ -1,5 +1,5 @@
-mixin board__grid(countX, countY)
-    .board__grid
+mixin board__grid(countX, countY, type)
+    div(class="board__grid board__grid--" + type)
         - for (var y = 0; y < countY; y++)
             .board__grid-row
                 - var currentCounterX = 0

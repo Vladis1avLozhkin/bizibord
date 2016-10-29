@@ -28,6 +28,19 @@ export default class BoardGrid {
         return grid;
     }
 
+    changeBoardTypeHandler(type) {
+        let grids = document.querySelectorAll('.board__grid');
+        Array.prototype.forEach.call(grids, (grid) => {
+            console.log(grid.classList);
+            if (grid.classList.contains('board__grid--' + type)) {
+                grid.classList.add('board__grid--active');
+            } else {
+                grid.classList.remove('board__grid--active');
+            }
+        });
+        console.log(type);
+    }
+
     fethcCards() {
         fetch('/board_cards.json')
             .then((response) => {
