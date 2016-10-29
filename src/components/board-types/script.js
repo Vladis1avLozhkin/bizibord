@@ -37,7 +37,6 @@ export default class BoardTypes {
                 if (this.changeBoardTypeHandler) {
                     this.changeBoardTypeHandler(input.value);
                 }
-
             }
         });
     }
