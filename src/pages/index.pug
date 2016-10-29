@@ -2,4 +2,8 @@ extends ../layouts/layout.pug
 
 block content
 
-    include ../containers/bizibord/tpl.pug
+    section.wrapper
+        section.sidebar
+            include ../components/cards/tpl.pug
+        main.main
+            include ../components/board/tpl.pug
