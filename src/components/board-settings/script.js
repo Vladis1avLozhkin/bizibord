@@ -28,6 +28,8 @@ export default class BoardSettings {
 
                 let label = e.target.parentNode;
                 label.classList.add('board-settings__type--active');
+
+                this.showBackgroundSettings();
             });
 
         });
@@ -54,12 +56,18 @@ export default class BoardSettings {
 
     }
 
+    showBackgroundSettings() {
+        let backgroundSettings = document.querySelector('.board-settings__backgrounds');
+        backgroundSettings.classList.add('board-settings__backgrounds--show');
+    }
+
     setDefaultSetting() {
         let typeInputs = document.querySelectorAll('.board-settings__type-input');
 
         Array.prototype.forEach.call(typeInputs, (input) => {
             if (input.checked) {
                 input.parentNode.classList.add('board-settings__types--active');
+                this.showBackgroundSettings();
 
                 if (this.changeBoardTypeHandler) {
                     this.changeBoardTypeHandler(input.value);
