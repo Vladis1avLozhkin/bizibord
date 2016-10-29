@@ -25,7 +25,7 @@ export default class Helper {
         this.stepIndex++;
         this.currentStep = this.helpers[this.stepIndex];
 
-        this.currentStep.start();
+        let start = this.currentStep.start();
         this.setContent();
 
         return true;

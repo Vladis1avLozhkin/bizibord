@@ -5,10 +5,9 @@ let helpers = [
             return 'Приветствие. Сообщение о том, что будет обучение.';
         },
         start: function() {
-            console.log('greeting start');
+            return true;
         },
         end: function() {
-            console.log('greeting end');
         },
         // Какие то настройки
         settings: {
@@ -22,10 +21,16 @@ let helpers = [
             return 'Для начала, выберите размер доски.';
         },
         start: function() {
-            console.log('change-board-size start');
+            let lightingNode = document.querySelector('.board-settings__types');
+            if (lightingNode) {
+                lightingNode.classList.add('lighting-node');
+            }
         },
         end: function() {
-            console.log('change-board-size end');
+            let lightingNode = document.querySelector('.board-settings__types');
+            if (lightingNode) {
+                lightingNode.classList.remove('lighting-node');
+            }
         },
         // Какие то настройки
         settings: {
