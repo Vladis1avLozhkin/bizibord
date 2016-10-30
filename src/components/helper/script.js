@@ -20,7 +20,10 @@ export default class Helper {
             return false;
         }
 
-        this.currentStep.end();
+        if (this.currentStep.end) {
+            this.currentStep.end();
+        }
+
         // Отменить продсветку у элементов предыдущего шага
         console.log(this.currentStep.elements);
         this.unlight(this.currentStep.elements);
@@ -54,7 +57,9 @@ export default class Helper {
             return false;
         }
 
-        this.currentStep.end();
+        if (this.currentStep.end) {
+            this.currentStep.end();
+        }
 
         this.stepIndex--;
         this.currentStep = this.helpers[this.stepIndex];

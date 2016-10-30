@@ -1,12 +1,9 @@
 let helpers = [
     {
-        action: 'greeting',
         content: function() {
             return 'Приветствие. Сообщение о том, что будет обучение.';
         },
         start: function() {
-        },
-        end: function() {
         },
         // Какие то настройки
         settings: {
@@ -15,7 +12,6 @@ let helpers = [
         }
     },
     {
-        action: 'change-board-size',
         elements: ['.board-settings__types'],
         content: function() {
             return 'Для начала, выберите размер доски.';
@@ -31,11 +27,8 @@ let helpers = [
                 });
             });
         },
-        end: function() {
-        },
     },
     {
-        action: 'change-board-background',
         elements: ['.board-settings__backgrounds'],
         content: function() {
             return 'Выбирите фон доски';
@@ -51,17 +44,12 @@ let helpers = [
                 });
             });
         },
-        end: function() {
-        },
     },
     {
-        action: 'end',
         content: function() {
             return 'Конец обучения';
         },
         start: function() {
-        },
-        end: function() {
         },
     },
 ];
