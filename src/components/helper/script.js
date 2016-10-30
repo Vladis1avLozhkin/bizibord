@@ -21,15 +21,21 @@ export default class Helper {
         }
 
         this.currentStep.end();
+        // Отменить продсветку у элементов предыдущего шага
+        console.log(this.currentStep.elements);
+        this.unlight(this.currentStep.elements);
 
         this.stepIndex++;
         this.currentStep = this.helpers[this.stepIndex];
-
         let startPromise = this.currentStep.start();
 
-        let helperFooter = document.querySelector('.helper__footer');
+        // Подсветить элементы текущего шага
+        this.light(this.currentStep.elements);
 
+        // Если пришел промис, ждем результата для перехода к слещующему шагу
+        let helperFooter = document.querySelector('.helper__footer');
         if (startPromise) {
+            // Если шаг завершается после дейсвий пользоватя не показывать кнопки в футере
             helperFooter.classList.add('helper__footer--hidden');
             startPromise.then((res) => {
                 this.next();
@@ -57,6 +63,36 @@ export default class Helper {
         this.setContent();
 
         return true;
+    }
+
+    /**
+     * Подсветить элементы
+     */
+    light(elements) {
+        if (! elements) return false;
+
+        elements.forEach((selector) => {
+            let node = document.querySelector(selector);
+            if (node) {
+                node.classList.add('lighting-node');
+            }
+        });
+
+    }
+
+    /**
+     * Убарить подсветку у элементов
+     */
+    unlight(elements) {
+        if (! elements) return false;
+
+        elements.forEach((selector) => {
+            let node = document.querySelector(selector);
+            if (node) {
+                node.classList.remove('lighting-node');
+            }
+        });
+
     }
 
     setContent() {

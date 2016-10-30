@@ -16,15 +16,11 @@ let helpers = [
     },
     {
         action: 'change-board-size',
+        elements: ['.board-settings__types'],
         content: function() {
             return 'Для начала, выберите размер доски.';
         },
         start: function() {
-            let lightingNode = document.querySelector('.board-settings__types');
-            if (lightingNode) {
-                lightingNode.classList.add('lighting-node');
-            }
-
             let inputs = document.querySelectorAll('.board-settings__type-input');
 
             return new Promise((resolve, reject) => {
@@ -36,28 +32,15 @@ let helpers = [
             });
         },
         end: function() {
-            let lightingNode = document.querySelector('.board-settings__types');
-            if (lightingNode) {
-                lightingNode.classList.remove('lighting-node');
-            }
         },
     },
     {
         action: 'change-board-background',
+        elements: ['.board-settings__backgrounds'],
         content: function() {
             return 'Выбирите фон доски';
         },
-        toggleLightingNode: function function_name() {
-            let lightingNode = document.querySelector('.board-settings__backgrounds');
-
-            if (lightingNode) {
-                lightingNode.classList.toggle('lighting-node');
-            }
-        },
         start: function() {
-            this.toggleLightingNode();
-            console.log(this.toggleLightingNode);
-
             let inputs = document.querySelectorAll('.board-settings__background-input');
 
             return new Promise((resolve, reject) => {
@@ -69,7 +52,6 @@ let helpers = [
             });
         },
         end: function() {
-            this.toggleLightingNode();
         },
     },
     {
