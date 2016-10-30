@@ -50,7 +50,7 @@ let helpers = [
         },
     },
     {
-        elements: ['.cards', '.board__grid'],
+        elements: ['.cards'],
         content: function() {
             return 'Для размещения игрушки, перетащите ее на доску.';
         },
@@ -66,7 +66,7 @@ let helpers = [
         },
     },
     {
-        elements: ['.board__grid'],
+        //elements: ['.board__grid'],
         content() {
             return 'Отлично. Игрушку таким же образом можно перемещать по доске.';
         },

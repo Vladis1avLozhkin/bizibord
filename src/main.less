@@ -47,9 +47,20 @@ html, body {
     width: 100%;
 }
 
+@keyframes lighting {
+    from {
+        transform: scale(.95, .95);
+    }
+    to {
+        transform: scale(1.05, 1.05);
+    }
+}
+
 // Для помомшника (переименовать)
 .lighting-node {
-    z-index: 11;
-    position: relative;
-    background: #fff;
+    animation: lighting .5s infinite alternate;
+
+    &:hover {
+        animation: none;
+    }
 }
