@@ -3,8 +3,12 @@ export default class Helper {
         this.helpers = helpers;
         this.stepIndex = 0;
         this.currentStep = this.helpers[this.stepIndex];
-        this.currentStep.start();
         this.setContent();
+
+        // Запуситить первый шаг
+        if (this.currentStep.start) {
+            this.currentStep.start();
+        }
 
         this.listenEvents();
     }
@@ -39,10 +43,8 @@ export default class Helper {
             startPromise = this.currentStep.start();
         }
 
-        // Если пришел промис, ждем результата для перехода к слещующему шагу
         let helperFooter = document.querySelector('.helper__footer');
         if (startPromise) {
-            // Если шаг завершается после дейсвий пользоватя не показывать кнопки в футере
             helperFooter.classList.add('helper__footer--hidden');
             startPromise.then((res) => {
                 this.next();

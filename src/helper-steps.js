@@ -3,8 +3,6 @@ let helpers = [
         content: function() {
             return 'Приветствие. Сообщение о том, что будет обучение.';
         },
-        start: function() {
-        },
         // Какие то настройки
         settings: {
             // Например позиция окна с подсказкой
@@ -49,8 +47,6 @@ let helpers = [
         elements: ['.cards'],
         content: function() {
             return 'Отлично. Теперь вы можете разместить на доске игрушки. Их список вы можете увидеть слева.';
-        },
-        start: function() {
         },
     },
     {
