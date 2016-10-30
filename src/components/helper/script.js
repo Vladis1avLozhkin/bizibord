@@ -29,10 +29,15 @@ export default class Helper {
 
         this.stepIndex++;
         this.currentStep = this.helpers[this.stepIndex];
-        let startPromise = this.currentStep.start();
 
         // Подсветить элементы текущего шага
         this.light(this.currentStep.elements);
+
+
+        let startPromise = null;
+        if (this.currentStep.start) {
+            startPromise = this.currentStep.start();
+        }
 
         // Если пришел промис, ждем результата для перехода к слещующему шагу
         let helperFooter = document.querySelector('.helper__footer');
@@ -63,7 +68,11 @@ export default class Helper {
         this.stepIndex--;
         this.currentStep = this.helpers[this.stepIndex];
 
-        this.currentStep.start();
+        let startPromise = null;
+        if (this.currentStep.start) {
+            startPromise = this.currentStep.start();
+        }
+
         this.setContent();
 
         return true;
