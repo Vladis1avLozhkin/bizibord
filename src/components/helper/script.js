@@ -25,7 +25,19 @@ export default class Helper {
         this.stepIndex++;
         this.currentStep = this.helpers[this.stepIndex];
 
-        let start = this.currentStep.start();
+        let startPromise = this.currentStep.start();
+
+        let helperFooter = document.querySelector('.helper__footer');
+
+        if (startPromise) {
+            helperFooter.classList.add('helper__footer--hidden');
+            startPromise.then((res) => {
+                this.next();
+            });
+        } else {
+            helperFooter.classList.remove('helper__footer--hidden');
+        }
+
         this.setContent();
 
         return true;
