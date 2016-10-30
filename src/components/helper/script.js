@@ -25,7 +25,6 @@ export default class Helper {
         }
 
         // Отменить продсветку у элементов предыдущего шага
-        console.log(this.currentStep.elements);
         this.unlight(this.currentStep.elements);
 
         this.stepIndex++;
@@ -78,6 +77,7 @@ export default class Helper {
 
         elements.forEach((selector) => {
             let node = document.querySelector(selector);
+            console.log(node);
             if (node) {
                 node.classList.add('lighting-node');
             }
