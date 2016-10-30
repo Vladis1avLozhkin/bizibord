@@ -87,10 +87,11 @@ export default class Helper {
         if (! elements) return false;
 
         elements.forEach((selector) => {
-            let node = document.querySelector(selector);
-            console.log(node);
-            if (node) {
-                node.classList.add('lighting-node');
+            let nodes = document.querySelectorAll(selector);
+            if (nodes) {
+                Array.prototype.forEach.call(nodes, (node) => {
+                    node.classList.add('lighting-node');
+                });
             }
         });
 
@@ -103,9 +104,11 @@ export default class Helper {
         if (! elements) return false;
 
         elements.forEach((selector) => {
-            let node = document.querySelector(selector);
-            if (node) {
-                node.classList.remove('lighting-node');
+            let nodes = document.querySelectorAll(selector);
+            if (nodes) {
+                Array.prototype.forEach.call(nodes, (node) => {
+                    node.classList.remove('lighting-node');
+                });
             }
         });
 

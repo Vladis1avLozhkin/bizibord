@@ -49,16 +49,18 @@ html, body {
 
 @keyframes lighting {
     from {
-        transform: scale(.95, .95);
+        opacity: .4;
+        transform: scale(.98, .98);
     }
     to {
-        transform: scale(1.05, 1.05);
+        opacity: 1;
+        transform: scale(1.03, 1.03);
     }
 }
 
 // Для помомшника (переименовать)
 .lighting-node {
-    animation: lighting .5s infinite alternate;
+    animation: lighting .4s infinite alternate;
 
     &:hover {
         animation: none;
