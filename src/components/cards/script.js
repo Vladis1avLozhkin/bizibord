@@ -34,7 +34,7 @@ export default class Cards {
     }
 
     fethcCards() {
-        fetch('/board_cards.json')
+        fetch('/cards.json')
             .then((response) => {
                 return response.json()
             }).then((json) => {
