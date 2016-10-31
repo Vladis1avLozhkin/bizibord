@@ -5,6 +5,9 @@ export default class Helper {
         this.currentStep = this.helpers[this.stepIndex];
         this.setContent();
 
+        let helper = document.querySelector('.helper');
+        helper.classList.add('helper--active');
+
         // Запуситить первый шаг
         if (this.currentStep.start) {
             this.currentStep.start();
@@ -21,6 +24,10 @@ export default class Helper {
 
     next() {
         if (this.helpers.length - 1 <= this.stepIndex) {
+            let helper = document.querySelector('.helper');
+            helper.classList.remove('helper--active');
+            this.unlight(this.currentStep.elements);
+
             return false;
         }
 
