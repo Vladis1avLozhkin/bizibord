@@ -14,8 +14,6 @@ export default class BoardGrid {
             col.addEventListener('dragleave', this.handleDragLeave, false);
             col.addEventListener('drop', this.handleDrop.bind(this));
         });
-
-        this.fethcCards();
     }
 
     get cleanGrid() {
@@ -60,59 +58,6 @@ export default class BoardGrid {
 
             grid.classList.add('board__grid--bg-' + bg);
         });
-    }
-
-    fethcCards() {
-        fetch('/board_cards.json')
-            .then((response) => {
-                return response.json()
-            }).then((json) => {
-                this.addCards(json);
-            });
-    }
-
-    addCards(cardsData) {
-        cardsData.forEach((cardData) => {
-            this.addCard(cardData);
-        });
-    }
-
-    addCard(data) {
-        let x = data.x;
-        let y = data.y;
-        let coll = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-
-        // Добавлене карточки на сетку
-        let card = document.createElement('div');
-
-        card.dataset.id = data.id;
-        card.dataset.x = data.x;
-        card.dataset.y = data.y;
-        card.setAttribute('draggable', 'true');
-        card.dataset.width = data.width;
-        card.dataset.height = data.height;
-
-        card.style.height = data.height * this.cardSize + 'px';
-        card.style.width = data.width * this.cardSize + 'px';
-
-        card.classList.add('card');
-        card.classList.add('card_in-grid');
-        card.classList.remove('card_draggable');
-
-        let image = document.createElement('img');
-        image.src = data.src;
-        image.setAttribute('draggable', 'false');
-        let removeBtn = document.createElement('button');
-        removeBtn.classList.add('card__remove-btn');
-
-        card.appendChild(image);
-        card.appendChild(removeBtn);
-
-        coll.appendChild(card);
-        this.handingCardEvent(card);
-
-        this.gridUpdate(x, y, data.width, data.height);
-        this.removeDragableCard();
     }
 
     save() {
